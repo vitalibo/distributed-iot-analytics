@@ -26,3 +26,26 @@ to Device Gateway over Ethernet protocol.
 | Flash Memory | 32 KB |
 | SRAM | 2 KB |
 | Frequency | 16 MHz |
+
+## Usage
+
+Before start, you need install `arduino-cli`, follow
+this [instruction](https://arduino.github.io/arduino-cli/latest/installation/) to do that.
+
+To install the arduino:avr platform core, run the following:
+
+```shell
+arduino-cli core install arduino:avr
+```
+
+To compile the sketch you run the compile command, passing the proper FQBN string:
+
+```shell
+arduino-cli compile --fqbn arduino:avr:uno --libraries src/arduino/libraries/ --output-dir target/ src/arduino/sketch/
+```
+
+To upload the sketch to your board, run the following command, using the serial port your board is connected to:
+
+```shell
+arduino-cli upload --fqbn arduino:avr:uno --port /dev/cu.usbserial-14620 -i target/sketch.ino.hex
+```
