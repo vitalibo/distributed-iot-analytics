@@ -1,0 +1,11 @@
+[submodule "Arduino/Ethernet"]
+	path = iot-device/src/arduino/libraries/Ethernet
+	url = git@github.com:arduino-libraries/Ethernet.git
+
+[submodule "Arduino/DHTlib"]
+	path = iot-device/src/arduino/libraries/DHTlib
+	url = git@github.com:RobTillaart/DHTlib.git
+
+[submodule "Arduino/FreeRTOS"]
+	path = iot-device/src/arduino/libraries/FreeRTOS
+	url = git@github.com:feilipu/Arduino_FreeRTOS_Library.git

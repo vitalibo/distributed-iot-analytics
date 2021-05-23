@@ -30,7 +30,12 @@ to Device Gateway over Ethernet protocol.
 ## Usage
 
 Before start, you need install `arduino-cli`, follow
-this [instruction](https://arduino.github.io/arduino-cli/latest/installation/) to do that.
+this [instruction](https://arduino.github.io/arduino-cli/latest/installation/) to do that,
+and update required libraries:
+
+```shell
+git submodule update --init --recursive
+```
 
 To install the arduino:avr platform core, run the following:
 
