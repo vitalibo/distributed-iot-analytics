@@ -1,0 +1,6 @@
+environment: local
+pipeline:
+  word_count:
+    word_count_sink:
+      kwargs:
+        file_path_prefix: './output'

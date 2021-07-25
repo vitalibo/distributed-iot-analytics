@@ -5,3 +5,4 @@ venv/
 target/
 .terraform/
 *.lock.hcl
+iot_analytic.egg-info/

@@ -1,0 +1,17 @@
+pipeline_options:
+  save_main_session: true
+pipeline:
+  word_count:
+    words_source:
+      type: source
+      class: 'apache_beam.io.ReadFromText'
+      kwargs:
+        file_pattern: 'gs://distributed-iot-analytics/word_count/Romeo_and_Juliet.txt'
+    word_count_sink:
+      type: sink
+      class: 'apache_beam.io.WriteToText'
+      kwargs:
+        file_path_prefix: 'gs://distributed-iot-analytics/word_count/output'
+    output_format:
+      type: property
+      value: '%s: %d'
