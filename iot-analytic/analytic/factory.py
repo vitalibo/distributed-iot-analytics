@@ -32,7 +32,8 @@ class Factory:
         known_args, pipeline_args = Factory.__parse_args(args)
         config = Factory.__get_profile_configuration(profile=known_args.profile)
         config['pipeline'] = config['pipeline'][known_args.pipeline]
-        pipeline_args = [f'--{k}={v}' for k, v in config.get('pipeline_args', {}).items()] + pipeline_args
+        for k, v in config.get('pipeline_args', {}).items():
+            pipeline_args += [f'--{k}', v]
         return Factory(known_args.pipeline, pipeline_args, config)
 
     def create_pipeline(self) -> core.Pipeline:
