@@ -91,7 +91,7 @@ class Factory:
 
         configuration = {}
         for classpath in Factory.__CLASSPATH:
-            path = Path(__file__).parents[1].joinpath(*[c.format(**kwargs) for c in classpath])
+            path = Path(__file__).parents[2].joinpath(*[c.format(**kwargs) for c in classpath])
 
             try:
                 with open(path, 'r', encoding='unicode_escape') as file:
