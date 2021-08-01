@@ -17,3 +17,8 @@ output "telemetry_topic_name" {
   value       = google_pubsub_topic.telemetry.name
   description = "Name of the IoT telemetry PubSub topic."
 }
+
+output "dataflow_word_count_pipeline_id" {
+  value       = google_dataflow_job.word_count_pipeline.job_id
+  description = "The unique ID of word count job."
+}

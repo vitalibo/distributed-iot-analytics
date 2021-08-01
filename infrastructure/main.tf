@@ -109,3 +109,24 @@ resource "google_cloudiot_device" "device" {
     ])
   }
 }
+
+resource "google_dataflow_job" "word_count_pipeline" {
+  region                  = var.region
+  project                 = var.project
+  name                    = "${local.name}-word-count-pipeline"
+  template_gcs_path       = "gs://${var.dataflow_job_bucket}/templates/word_count"
+  temp_gcs_location       = "gs://${var.dataflow_job_bucket}/tmp_dir"
+  max_workers             = 2
+  on_delete               = "cancel"
+  machine_type            = var.machine_type
+  enable_streaming_engine = false
+  additional_experiments  = [
+    "use_fastavro"
+  ]
+
+  lifecycle {
+    ignore_changes = [
+      state
+    ]
+  }
+}

@@ -1,4 +1,4 @@
-environment := dev
+environment := develop
 project := $(shell gcloud config get-value project)
 auto-approve := false
 debug := false
@@ -38,6 +38,23 @@ configure:
         TF_RUN_CONF := $(TF_RUN_CONF) -auto-approve
     endif
 
+package:
+	BUCKET="$(call GET_TFVAR,'dataflow_job_bucket')" ; \
+	REGION="$(call GET_TFVAR,'region')" ; \
+	DIR="$(CURDIR)/../iot-analytic" ; \
+	. ../venv/bin/activate ; \
+	\
+	for pipeline in 'word_count' ; do \
+		PYTHONPATH="$$DIR/src/:$$PYTHONPATH" python -m analytic.driver \
+			--pipeline=$$pipeline \
+			--profile=$(environment) \
+			--project=$(project) \
+			--region="$$REGION" \
+			--staging_location="gs://$$BUCKET/staging" \
+			--template_location="gs://$$BUCKET/templates/$$pipeline" \
+			--setup_file="$$DIR/setup.py" ; \
+	done
+
 .PHONY: init
 init: configure
 	$(TF_ENV_VARS) terraform init $(TF_OPTIONS) $(TF_INIT_CONF)
@@ -47,7 +64,7 @@ plan: init
 	$(TF_ENV_VARS) terraform plan $(TF_OPTIONS) $(TF_RUN_CONF)
 
 .PHONY: apply
-apply: init
+apply: init package
 	$(TF_ENV_VARS) terraform apply $(TF_OPTIONS) $(TF_RUN_CONF)
 
 .PHONY: destroy

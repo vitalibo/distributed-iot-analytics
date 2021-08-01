@@ -1,7 +1,3 @@
 environment: develop
 pipeline_args:
   runner: DataflowRunner
-  region: '<Region>'
-  project: '<ProjectId>'
-  temp_location: 'gs://<BucketName>/tmp/'
-  setup_file: './setup.py'

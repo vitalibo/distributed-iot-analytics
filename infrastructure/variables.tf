@@ -40,6 +40,17 @@ variable "log_level" {
   default     = "DEBUG"
 }
 
+variable "dataflow_job_bucket" {
+  type        = string
+  description = "(Required) The GCS bucket name used for Dataflow jobs."
+}
+
+variable "machine_type" {
+  type        = string
+  description = "(Optional) The machine type to use for the job."
+  default     = null
+}
+
 variable "backend_bucket" {
   type        = string
   description = "(Required) The name of the GCS bucket where state snapshots are stored."
